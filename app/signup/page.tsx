@@ -9,8 +9,9 @@ import {createUserWithEmailAndPassword, updateProfile} from "@firebase/auth";
 import {auth} from "@/lib/firebaseConfig";
 import {doc, setDoc} from "@firebase/firestore";
 import { db } from '@/lib/firebaseConfig';
+import {fixIcon} from "@/utils/fixIcon";
 
-export const SignUpPage= () =>{
+ const SignUpPage= () =>{
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -19,6 +20,7 @@ export const SignUpPage= () =>{
     const [success, setSuccess] = useState<string>('');
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const router = useRouter();
+    const XLogoBold = fixIcon(PiXLogoBold);
     const validateForm =():boolean => {
         if(!email || !password || !fullName || !username){
             setError('All fields are required');
@@ -69,7 +71,7 @@ export const SignUpPage= () =>{
     return(
         <section className = {styles.signupContainer}>
             <div className={styles.logoContainer}>
-                <PiXLogoBold className={styles.logo}/>
+                <XLogoBold className={styles.logo}/>
             </div>
             <h1 className={styles.title}>Join X Today</h1>
             <form onSubmit={handleSignUp} className={styles.form}>

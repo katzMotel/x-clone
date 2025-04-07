@@ -1,5 +1,6 @@
 'use client';
 import styles from './login.module.scss';
+import React from "react";
 import {PiXLogoBold} from "react-icons/pi";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
@@ -7,13 +8,15 @@ import {signInWithEmailAndPassword} from "@firebase/auth";
 import {auth} from '@/lib/firebaseConfig';
 import Link from "next/link";
 import Toast from '@/components/Toast';
-export const LoginPage = () => {
+import { fixIcon} from "@/utils/fixIcon";
+
+ const LoginPage = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
     const [showToast, setShowToast] = useState<boolean>(false);
     const router = useRouter();
-
+    const XLogoBold = fixIcon(PiXLogoBold);
     const handleLogin = async (event: React.FormEvent) => {
         event.preventDefault();
         setError(null);
@@ -29,7 +32,7 @@ export const LoginPage = () => {
     return(
         <div className={styles.container}>
             <div className={styles.loginBox}>
-                <PiXLogoBold className={`${styles.icon} ${styles.logo}`}/>
+                <XLogoBold className={`${styles.icon} ${styles.logo}`}/>
                 <h1 className={styles.header}>Sign in to X</h1>
                 {error && <div className={styles.error}>{error}</div>}
             <form onSubmit={handleLogin} className={styles.form}>
